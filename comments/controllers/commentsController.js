@@ -4,8 +4,8 @@ const { randomBytes } = require('crypto');
 const getComments = async (req, res) => {
     try {
         const { id } = req.params;
-        const comments = comments[id]
-        res.status(200).json({ msg: 'Comments retrieved successfully', comments})
+        const comment = comments[id]
+        res.status(200).json({ msg: 'Comments retrieved successfully', comment})
     }catch(err) {
         res.status(500).json({msg: err.message})
     }
