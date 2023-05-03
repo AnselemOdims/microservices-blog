@@ -1,28 +1,32 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import CommentsForm from './CommentsForm';
 
 const PostList = () => {
-    const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
-    const fetchPosts = async () => {
-        const { data } = await axios.get('http://localhost:4000/posts')
-        setPosts(data.posts)
-    }
+  const fetchPosts = async () => {
+    const { data } = await axios.get('http://localhost:4000/posts');
+    setPosts(data.posts);
+  };
 
-    useEffect(() => {
-        fetchPosts()
-    }, [])
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
-    console.log(posts)
+  console.log(posts);
 
-    return ( 
-        <div>
-            <h2>Posts</h2>
-            {posts?.map(post => (
-                <div key={post.id}>{post.title}</div>
-            ))}
-        </div>
-     );
-}
- 
+  return (
+    <div>
+      <>Posts </>
+      {posts?.map((post) => (
+        <>
+          <div key={post.id}>{post.title}</div>
+          <CommentsForm />
+        </>
+      ))}
+    </div>
+  );
+};
+
 export default PostList;
