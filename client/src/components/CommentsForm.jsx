@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { useState } from 'react';
 
-const CommentsForm = ({ commentId }) => {
+const CommentsForm = ({ postId }) => {
   const [comment, setComment] = useState('');
   const [loading, setLoading] = useState(false)
 
@@ -9,7 +10,7 @@ const CommentsForm = ({ commentId }) => {
     try {
         setLoading(true)
         const { data } = await axios.post(
-            `http://localhost:4001/posts/${commentId}/comments`,
+            `http://localhost:4001/posts/${postId}/comments`,
             { comment: e.target.value }
           );
           console.log(data);

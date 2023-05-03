@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import CommentsForm from './CommentsForm';
+import CommentList from './CommentsLists';
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -22,7 +23,8 @@ const PostList = () => {
       {posts?.map((post) => (
         <>
           <div key={post.id}>{post.title}</div>
-          <CommentsForm />
+          <CommentList postId={post.id}/>
+          <CommentsForm postId={post.id}/>
         </>
       ))}
     </div>
