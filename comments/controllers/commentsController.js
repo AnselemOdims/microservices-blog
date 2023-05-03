@@ -1,12 +1,12 @@
-const comments = require('../model/Comment');
+const allComments = require('../model/Comment');
 const { randomBytes } = require('crypto');
 
 const getComments = async (req, res) => {
     try {
         const { id } = req.params;
-        const comment = comments[id]
-        res.status(200).json({ msg: 'Comments retrieved successfully', comment})
-    }catch(err) {
+        const comments = allComments[id]
+        res.status(200).json({ msg: 'Comments retrieved successfully', comments })
+    } catch(err) {
         res.status(500).json({msg: err.message})
     }
 }
