@@ -21,10 +21,10 @@ app.post('/api/v1/events', (req, res) => {
             posts.push({ id, title, comments: []})
         }
         if(type === 'CommentCreated') {
-            const { commentId, comment, postId } = data;
+            const { commentId, comment, postId, status } = data;
             posts.forEach(item => {
                 if(item.id === postId) {
-                    item.comments.push({ commentId, comment })
+                    item.comments.push({ commentId, comment, status })
                 }
             })
         }

@@ -11,6 +11,7 @@ app.post('/events', async (req, res) => {
         await axios.post('http://localhost:4000/api/v1/events', req.body)
         await axios.post('http://localhost:4001/api/v1/events', req.body)
         await axios.post('http://localhost:4002/api/v1/events', req.body)
+        await axios.post('http://localhost:4003/api/v1/events', req.body)
 
         res.status(200).json({ message: "Event sent to all services"});
     } catch(err) {

@@ -17,7 +17,7 @@ const postComments = async (req, res) => {
         const { id: postId } = req.params;
         const { comment } = req.body;
         const commentId = randomBytes(4).toString('hex');
-        const newComment = { commentId, comment, postId }
+        const newComment = { commentId, comment, postId, status: 'pending' }
         const postComment = allComments[postId] || []
         postComment.push(newComment)
         allComments[postId] = postComment
