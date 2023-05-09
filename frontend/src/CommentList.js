@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from 'react';
 
 const CommentList = ({ comments }) => {
-
-  const renderedComments = comments.map((comment) => {
-    return <li key={comment.commentId}>{comment.comment}</li>;
-  });
-
-  return <ul>{renderedComments}</ul>;
+  return (
+    <ul>
+      {comments.map((comment) => (
+        <li key={comment.commentId}>
+          {comment.status === 'approved'
+            ? comment.comment
+            : comment.status === 'rejected'
+            ? 'This comment has been rejected'
+            : 'This comment is awaiting moderation'}
+        </li>
+      ))}
+    </ul>
+  );
 };
 
 export default CommentList;

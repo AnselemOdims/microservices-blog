@@ -13,6 +13,7 @@ app.get('/api/v1/posts', (req, res) => {
 })
 
 app.post('/api/v1/events', (req, res) => {
+    console.log('Received Event', req.body.type)
     const { type, data } = req.body;
     try {
 
@@ -28,7 +29,19 @@ app.post('/api/v1/events', (req, res) => {
                 }
             })
         }
-        console.log(posts)
+        if(type === 'CommentUpdated') {
+            const { commentId, comment, postId, status } = data;
+            posts.forEach(item => {
+                if(item.id === postId) {
+                    item.comments.forEach(commentItem => {
+                        if(commentItem.commentId === commentId) {
+                            commentItem.status = status
+                            commentItem.comment = comment
+                        }
+                    })
+                }
+            })
+        }
         res.status(200).json({ message: 'Event received', posts })
     } catch(err) {
         console.log(err)
