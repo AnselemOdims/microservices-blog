@@ -1,5 +1,6 @@
 const allComments = require('../model/Comment');
 const { randomBytes } = require('crypto');
+const axios = require('axios');
 
 const getComments = async (req, res) => {
     try {
@@ -13,14 +14,20 @@ const getComments = async (req, res) => {
 
 const postComments = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id: postId } = req.params;
         const { comment } = req.body;
         const commentId = randomBytes(4).toString('hex');
-        const newComment = { commentId, comment}
-        const postComment = comments[id] || []
+        const newComment = { commentId, comment, postId }
+        const postComment = allComments[postId] || []
         postComment.push(newComment)
-        comments[id] = postComment
-        res.status(201).json({ msg: 'Comment posted successfully', comments})
+        allComments[postId] = postComment
+
+        await axios.post('http://localhost:4005/events', {
+            type: 'CommentCreated',
+            data: newComment
+        })
+
+        res.status(201).json({ msg: 'Comment posted successfully', allComments})
     }catch(err) {
         res.status(500).json({msg: err.message})
     }
