@@ -28,7 +28,7 @@ app.post('/api/v1/events', (req, res) => {
 
         try {
 
-            axios.post('http://localhost:4005/events', {
+            axios.post('http://event-bus-srv:4005/events', {
                 type: 'CommentUpdated',
                 data:{
                     ...data,

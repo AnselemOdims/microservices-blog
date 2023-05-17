@@ -15,7 +15,7 @@ app.post('/api/v1/events', async (req, res) => {
         const moderatedStatus = comment.includes('shit') ? 'rejected' : 'approved'
         console.log(moderatedStatus)
         try {
-            axios.post('http://localhost:4005/events', {
+            axios.post('http://event-bus-srv:4005/events', {
                 type: 'CommentModerated',
                 data: {
                     ...data,
