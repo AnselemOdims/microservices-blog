@@ -13,7 +13,7 @@ app.use('/api/v1/', router);
 app.post('/api/v1/events', (req, res) => {
     console.log('Received Event', req.body.type)
     const { type, data } = req.body;
-    console.log(posts)
+
     if(type === 'CommentUpdated') {
         const { commentId, comment, postId, status } = data;
         posts.forEach(item => {
@@ -31,5 +31,6 @@ app.post('/api/v1/events', (req, res) => {
 })
 
 app.listen(4000, () => {
+    console.log('Post Server running v1.0.0')
     console.log('Post Server listening on port 4000')
 })
